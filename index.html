@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>San Valentín 💗</title>
+<title>San Valentín 💘</title>
 
 <style>
 body {
@@ -74,8 +74,16 @@ button:hover {
   margin-top: 15px;
   font-size: 18px;
   color: #444;
-  display: none;
+  display: false;
   font-weight: bold;
+}
+
+/* GIF */
+#gifFinal {
+  display: none;
+  margin-top: 15px;
+  width: 240px;
+  border-radius: 20px;
 }
 
 /* CORAZONES EXPLOSIÓN */
@@ -109,14 +117,17 @@ button:hover {
 
 <div class="card">
 
-<img src="https://i.imgur.com/P3ZCHMn.jpeg" alt="imagen">
+<img src="https://i.imgur.com/P3ZCHMn.jpeg" alt="imagen" id="imagenPrincipal">
 
 <h1>¿Rocío quieres ser mi San Valentín? 💗</h1>
 
-<button id="si" onclick="acepta()">Sí 💗</button>
+<button id="si" onclick="acepta()">Sí 💗 </button>
 <button id="no" onclick="rechaza()">No 💔</button>
 
 <div class="mensaje" id="msg"></div>
+
+<!-- TU GIF ESPECÍFICO -->
+<img id="gifFinal" src="https://i.pinimg.com/originals/da/f3/a4/daf3a4c4ec06aea34548831c80421207.gif" alt="beso Hello Kitty">
 
 </div>
 
@@ -140,6 +151,8 @@ function acepta() {
   document.getElementById("msg").style.display = "block";
   document.getElementById("msg").innerHTML =
     "VAMOO más te valía decir q si 🙄";
+
+  document.getElementById("gifFinal").style.display = "block";
 
   for (let i = 0; i < 60; i++) {
     crearCorazon();
@@ -176,4 +189,3 @@ function crearCorazon() {
 
 </body>
 </html>
-
