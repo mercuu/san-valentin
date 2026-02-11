@@ -67,13 +67,21 @@ button:hover { transform: scale(1.1); }
   font-weight: bold;
 }
 
-/* GIF */
+/* GIF animado */
 #gifFinal {
-  display: none;          /* no visible al inicio */
+  display: none;
   width: 280px;
   border-radius: 20px;
   margin: 15px auto 0 auto;
-  display: block;         /* centrado horizontal */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* clase que activa animación del gif */
+.showGif {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* CORAZONES */
@@ -81,11 +89,13 @@ button:hover { transform: scale(1.1); }
   position: absolute;
   font-size: 25px;
   animation: floatUp 4s linear forwards;
+  pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-800px); opacity: 0; }
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to { transform: translateY(-800px) scale(1.2); opacity: 0; }
 }
 </style>
 </head>
@@ -104,20 +114,27 @@ button:hover { transform: scale(1.1); }
 <script>
 let tamañoSi = 1;
 
-// Función para mostrar gif y mensaje de "Sí"
+// Gif de Giphy que funcionan en GitHub Pages
+const GIF_BESITO = "https://media.giphy.com/media/3ohhwytHcusSCXXOUg/giphy.gif";
+const GIF_LLORANDO = "https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif";
+
+// Función "Sí"
 function acepta() {
   const msg = document.getElementById("msg");
   msg.style.display = "block";
   msg.innerText = "VAMOO más te valía decir que sí 🙄";
 
   const gif = document.getElementById("gifFinal");
-  gif.src = "https://i.imgur.com/yLbiN8f.gif"; // gif de besito
-  gif.style.display = "block";                // mostrar siempre
+  gif.src = GIF_BESITO;
+  gif.style.display = "block";
+  gif.classList.remove("showGif"); // reinicia animación
+  void gif.offsetWidth;
+  gif.classList.add("showGif");
 
   for (let i = 0; i < 60; i++) crearCorazon();
 }
 
-// Función para mostrar gif y mensaje de "No"
+// Función "No"
 function rechaza() {
   const msg = document.getElementById("msg");
   msg.style.display = "block";
@@ -127,17 +144,19 @@ function rechaza() {
   document.getElementById("si").style.transform = "scale(" + tamañoSi + ")";
 
   const gif = document.getElementById("gifFinal");
-  gif.src = "https://i.imgur.com/PCKIKAJ.gif"; // gif llorando
-  gif.style.display = "block";                 // mostrar siempre
+  gif.src = GIF_LLORANDO;
+  gif.style.display = "block";
+  gif.classList.remove("showGif");
+  void gif.offsetWidth;
+  gif.classList.add("showGif");
 }
 
-// Función para crear corazones animados
+// Crear corazones alrededor de la ventana
 function crearCorazon() {
   let heart = document.createElement("div");
   heart.className = "heart";
   heart.innerText = "💗";
 
-  // posición aleatoria en la ventana
   heart.style.left = Math.random() * window.innerWidth + "px";
   heart.style.top = "100%";
 
