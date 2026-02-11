@@ -1,0 +1,66 @@
+<script>
+/* CORAZONES DE FONDO CONSTANTES 💗 */
+setInterval(() => {
+  let fondo = document.createElement("div");
+  fondo.className = "fondo-corazon";
+  fondo.innerHTML = "💗";
+  fondo.style.left = Math.random() * 100 + "vw";
+  fondo.style.fontSize = (Math.random() * 20 + 15) + "px";
+  document.body.appendChild(fondo);
+  setTimeout(() => fondo.remove(), 10000);
+}, 700);
+
+let tamañoSi = 1;
+
+function acepta() {
+  document.getElementById("msg").style.display = "block";
+  document.getElementById("msg").innerHTML =
+    "VAMOO más te valía decir q si 🙄";
+
+  // Corazones explosión
+  for (let i = 0; i < 60; i++) {
+    crearCorazon();
+  }
+
+  // GIF sorpresa
+  let gif = document.createElement("img");
+  gif.src = "https://i.pinimg.com/originals/da/f3/a4/daf3a4c4ec06aea34548831c80421207.gif";
+  gif.style.position = "fixed";
+  gif.style.left = "50%";
+  gif.style.top = "50%";
+  gif.style.transform = "translate(-50%, -50%)";
+  gif.style.width = "300px";
+  gif.style.height = "auto";
+  gif.style.zIndex = "10";
+  document.body.appendChild(gif);
+
+  // Quitar el GIF después de 5 segundos
+  setTimeout(() => gif.remove(), 5000);
+}
+
+function rechaza() {
+  document.getElementById("msg").style.display = "block";
+  document.getElementById("msg").innerHTML =
+    "q mala :(💔";
+
+  tamañoSi += 0.2;
+  document.getElementById("si").style.transform =
+    "scale(" + tamañoSi + ")";
+}
+
+/* CORAZONES EXPLOSIÓN 💗 */
+function crearCorazon() {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💗";
+
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.top = "100%";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 4000);
+}
+</script>
