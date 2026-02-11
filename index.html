@@ -92,8 +92,8 @@ button:hover { transform: scale(1.1); }
 
 <div class="card">
   <img class="mainImg" src="https://i.imgur.com/P3ZCHMn.jpeg" alt="imagen principal">
-  <h1>Rocío, ¿quieres ser mi San Valentín? 💖</h1>
-  <button id="si" onclick="acepta()">Sí 💘</button>
+  <h1>¿Rocio, quieres ser mi San Valentín? 💗</h1>
+  <button id="si" onclick="acepta()">Sí💗 </button>
   <button id="no" onclick="rechaza()">No 💔</button>
   <div class="mensaje" id="msg"></div>
   <img id="imgFinal" src="" alt="Imagen final">
@@ -102,24 +102,25 @@ button:hover { transform: scale(1.1); }
 <script>
 let tamañoSi = 1;
 
-// Enlaces definitivos que me pasaste
-const IMG_SI = "https://i.imgur.com/8qwdhiR.jpeg"; // Hello Kitty y Daniel besándose
-const IMG_NO = "https://i.imgur.com/6f3ea183-5ac8-439c-8063-cb7901d3e371.png"; // Imagen del "No"
+// Imágenes directas desde la web
+const IMG_SI = "https://es.wallpapers.com/images/hd/cute-kitties-hello-kitty-besando-a-dear-daniel-706pa398qyle2ix5.jpg"; // Hello Kitty besando Dear Daniel :contentReference[oaicite:2]{index=2}
+const IMG_NO = "https://favpng.com/png_view/penguin-hello-kitty-badtz-maru-sanrio-png/GtG2q0aF"; // Badtz-Maru de Sanrio :contentReference[oaicite:3]{index=3}
 
 function acepta() {
   document.getElementById("msg").style.display = "block";
-  document.getElementById("msg").innerText = "VAMOO más te valía decir que sí 🙄";
+  document.getElementById("msg").innerText = "vamoo más te valía decir que si 🙄";
 
   const img = document.getElementById("imgFinal");
   img.src = IMG_SI;
   img.style.display = "block";
 
+  // Corazones
   for (let i = 0; i < 60; i++) crearCorazon();
 }
 
 function rechaza() {
   document.getElementById("msg").style.display = "block";
-  document.getElementById("msg").innerText = "q mala :(💔";
+  document.getElementById("msg").innerText = "que mala :( 💔";
 
   tamañoSi += 0.2;
   document.getElementById("si").style.transform = "scale(" + tamañoSi + ")";
