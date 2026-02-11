@@ -1,145 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>San Valentín 💘</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín? 🖤</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sanrio-pink: #ffb7c5;
+            --dark-blue: #1a1a2e;
+            --sanrio-red: #ff0000;
+            --accent-white: #ffffff;
+        }
 
-<style>
-body {
-  background: linear-gradient(135deg, #f8c8d8, #ffd6e8);
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-}
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--dark-blue); /* Toque masculino: fondo oscuro */
+            font-family: 'Fredoka One', cursive;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
 
-.card {
-  background: white;
-  width: 320px;
-  padding: 25px;
-  border-radius: 25px;
-  text-align: center;
-  box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
-  position: relative;
-  animation: latido 2s infinite;
-}
+        /* Contenedor Principal */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            border: 4px solid var(--sanrio-pink);
+            box-shadow: 0 0 20px rgba(255, 183, 197, 0.5);
+            max-width: 400px;
+            z-index: 10;
+        }
 
-@keyframes latido {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-}
+        h1 {
+            font-size: 2rem;
+            text-shadow: 2px 2px #ff4d6d;
+        }
 
-img.mainImg {
-  width: 200px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-}
+        .main-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 3px solid white;
+        }
 
-h1 {
-  font-size: 22px;
-  color: #b0004d;
-  margin: 15px 0;
-}
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
 
-button {
-  border: none;
-  padding: 15px 35px;
-  font-size: 18px;
-  border-radius: 30px;
-  cursor: pointer;
-  margin: 10px;
-  transition: 0.3s;
-}
+        button {
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Fredoka One', cursive;
+        }
 
-#si { background: #d1005d; color: white; }
-#no { background: #444; color: white; }
-button:hover { transform: scale(1.1); }
+        #btn-si {
+            background-color: var(--sanrio-pink);
+            color: white;
+            box-shadow: 0 5px 0 #e6a4b1;
+        }
 
-.mensaje {
-  margin-top: 15px;
-  font-size: 18px;
-  color: #444;
-  display: none;
-  font-weight: bold;
-}
+        #btn-no {
+            background-color: #444;
+            color: white;
+            box-shadow: 0 5px 0 #222;
+        }
 
-#imgFinal {
-  display: none;
-  width: 280px;
-  border-radius: 20px;
-  margin-top: 15px;
-}
+        /* Lluvia de corazones */
+        .heart {
+            position: absolute;
+            color: var(--sanrio-pink);
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
 
-/* CORAZONES */
-.heart {
-  position: absolute;
-  font-size: 25px;
-  animation: floatUp 4s linear forwards;
-  pointer-events: none;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-800px); opacity: 0; }
-}
-</style>
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
-  <img class="mainImg" src="https://i.imgur.com/P3ZCHMn.jpeg" alt="imagen principal">
-  <h1>¿Rocio, quieres ser mi San Valentín? 💗</h1>
-  <button id="si" onclick="acepta()">Sí💗 </button>
-  <button id="no" onclick="rechaza()">No 💔</button>
-  <div class="mensaje" id="msg"></div>
-  <img id="imgFinal" src="" alt="Imagen final">
-</div>
+    <div class="container" id="main-card">
+        <img id="display-img" class="main-img" src="https://i.pinimg.com/originals/f3/7a/7d/f37a7d90d7c0410658390b7937747e9e.gif" alt="Sanrio">
+        <h1 id="question">¿Quieres ser mi San Valentín? 🎀💀</h1>
+        
+        <div class="buttons">
+            <button id="btn-si">SÍ</button>
+            <button id="btn-no">NO</button>
+        </div>
+    </div>
 
-<script>
-let tamañoSi = 1;
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const img = document.getElementById('display-img');
+        const question = document.getElementById('question');
+        
+        let siScale = 1;
 
-// Imágenes directas desde la web
-const IMG_SI = "https://es.wallpapers.com/images/hd/cute-kitties-hello-kitty-besando-a-dear-daniel-706pa398qyle2ix5.jpg"; // Hello Kitty besando Dear Daniel :contentReference[oaicite:2]{index=2}
-const IMG_NO = "https://favpng.com/png_view/penguin-hello-kitty-badtz-maru-sanrio-png/GtG2q0aF"; // Badtz-Maru de Sanrio :contentReference[oaicite:3]{index=3}
+        // Reemplaza estas URLs con tus imágenes reales de GitHub
+        const imgCuandoDiceSi = "TU_IMAGEN_SI.jpg"; 
+        const imgCuandoDiceNo = "TU_IMAGEN_NO.jpg";
 
-function acepta() {
-  document.getElementById("msg").style.display = "block";
-  document.getElementById("msg").innerText = "vamoo más te valía decir que si 🙄";
+        btnNo.addEventListener('click', () => {
+            // Cambiar imagen a la de "No"
+            img.src = imgCuandoDiceNo;
+            
+            // Hacer el botón SI más grande
+            siScale += 0.4;
+            btnSi.style.transform = `scale(${siScale})`;
+            
+            // Mover el botón NO de lugar para que sea difícil darle
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            btnNo.style.position = "absolute";
+            btnNo.style.left = x + "px";
+            btnNo.style.top = y + "px";
+        });
 
-  const img = document.getElementById("imgFinal");
-  img.src = IMG_SI;
-  img.style.display = "block";
+        btnSi.addEventListener('click', () => {
+            // Cambiar imagen y texto
+            img.src = imgCuandoDiceSi;
+            question.innerHTML = "¡SABÍA QUE DIRÍAS QUE SÍ! ❤️🔥";
+            document.querySelector('.buttons').style.display = 'none';
+            
+            // Lanzar corazones
+            setInterval(createHeart, 150);
+        });
 
-  // Corazones
-  for (let i = 0; i < 60; i++) crearCorazon();
-}
-
-function rechaza() {
-  document.getElementById("msg").style.display = "block";
-  document.getElementById("msg").innerText = "que mala :( 💔";
-
-  tamañoSi += 0.2;
-  document.getElementById("si").style.transform = "scale(" + tamañoSi + ")";
-
-  const img = document.getElementById("imgFinal");
-  img.src = IMG_NO;
-  img.style.display = "block";
-}
-
-function crearCorazon() {
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = "💗";
-  heart.style.left = Math.random() * window.innerWidth + "px";
-  heart.style.top = "100%";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 4000);
-}
-</script>
-
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
