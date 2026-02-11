@@ -12,8 +12,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
   margin: 0;
+  overflow: hidden;
 }
 
 /* TARJETA */
@@ -25,7 +25,6 @@ body {
   text-align: center;
   box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
   position: relative;
-  z-index: 2;
   animation: latido 2s infinite;
 }
 
@@ -56,19 +55,9 @@ button {
   transition: 0.3s;
 }
 
-#si {
-  background: #d1005d;
-  color: white;
-}
-
-#no {
-  background: #444;
-  color: white;
-}
-
-button:hover {
-  transform: scale(1.1);
-}
+#si { background: #d1005d; color: white; }
+#no { background: #444; color: white; }
+button:hover { transform: scale(1.1); }
 
 .mensaje {
   margin-top: 15px;
@@ -86,7 +75,7 @@ button:hover {
   border-radius: 20px;
 }
 
-/* CORAZONES EXPLOSIÓN */
+/* CORAZONES */
 .heart {
   position: absolute;
   font-size: 25px;
@@ -97,95 +86,47 @@ button:hover {
   from { transform: translateY(0); opacity: 1; }
   to { transform: translateY(-800px); opacity: 0; }
 }
-
-/* CORAZONES DE FONDO */
-.fondo-corazon {
-  position: absolute;
-  font-size: 18px;
-  opacity: 0.25;
-  animation: flotar 10s linear infinite;
-}
-
-@keyframes flotar {
-  from { transform: translateY(100vh); }
-  to { transform: translateY(-10vh); }
-}
 </style>
 </head>
 
 <body>
 
 <div class="card">
-
-<img src="https://i.imgur.com/P3ZCHMn.jpeg" alt="imagen" id="imagenPrincipal">
-
-<h1>¿Rocío quieres ser mi San Valentín? 💖</h1>
-
-<button id="si" onclick="acepta()">Sí 💘</button>
-<button id="no" onclick="rechaza()">No 💔</button>
-
-<div class="mensaje" id="msg"></div>
-
-<!-- GIF HELLO KITTY 💗 -->
-<img id="gifFinal" src="https://i.imgur.com/yLbiN8f.gif" alt="Hello Kitty besando a Daniel">
-
+  <img src="https://i.imgur.com/P3ZCHMn.jpeg" alt="imagen principal">
+  <h1>¿Rocío quieres ser mi San Valentín? 💖</h1>
+  <button id="si" onclick="acepta()">Sí 💘</button>
+  <button id="no" onclick="rechaza()">No 💔</button>
+  <div class="mensaje" id="msg"></div>
+  <img id="gifFinal" src="https://i.imgur.com/yLbiN8f.gif" alt="Hello Kitty besando a Daniel">
 </div>
 
 <script>
-
-/* CORAZONES DE FONDO CONSTANTES 💗 */
-setInterval(() => {
-  let fondo = document.createElement("div");
-  fondo.className = "fondo-corazon";
-  fondo.innerHTML = "💗";
-  fondo.style.left = Math.random() * 100 + "vw";
-  fondo.style.fontSize = (Math.random() * 20 + 15) + "px";
-  document.body.appendChild(fondo);
-
-  setTimeout(() => fondo.remove(), 10000);
-}, 700);
-
 let tamañoSi = 1;
 
 function acepta() {
   document.getElementById("msg").style.display = "block";
-  document.getElementById("msg").innerHTML =
-    "VAMOO más te valía decir q si 🙄";
-
-  // Mostrar GIF de Hello Kitty besando a Daniel
+  document.getElementById("msg").innerText = "VAMOO más te valía decir que sí 🙄";
   document.getElementById("gifFinal").style.display = "block";
 
-  for (let i = 0; i < 60; i++) {
-    crearCorazon();
-  }
+  for (let i = 0; i < 60; i++) crearCorazon();
 }
 
 function rechaza() {
   document.getElementById("msg").style.display = "block";
-  document.getElementById("msg").innerHTML =
-    "q mala :(💔";
-
+  document.getElementById("msg").innerText = "q mala :(💔";
   tamañoSi += 0.2;
-  document.getElementById("si").style.transform =
-    "scale(" + tamañoSi + ")";
+  document.getElementById("si").style.transform = "scale(" + tamañoSi + ")";
 }
 
-/* CORAZONES EXPLOSIÓN 💗 */
 function crearCorazon() {
   let heart = document.createElement("div");
   heart.className = "heart";
-  heart.innerHTML = "💗";
-
+  heart.innerText = "💗";
   heart.style.left = Math.random() * window.innerWidth + "px";
   heart.style.top = "100%";
-
   document.body.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 4000);
+  setTimeout(() => heart.remove(), 4000);
 }
-
 </script>
 
 </body>
