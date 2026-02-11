@@ -13,6 +13,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  overflow: hidden;
 }
 
 .card {
@@ -77,6 +78,7 @@ button:hover { transform: scale(1.1); }
   position: absolute;
   font-size: 25px;
   animation: floatUp 4s linear forwards;
+  pointer-events: none;
 }
 
 @keyframes floatUp {
@@ -100,9 +102,9 @@ button:hover { transform: scale(1.1); }
 <script>
 let tamañoSi = 1;
 
-// Imágenes finales (debes subirlas a tu repo en /assets/)
-const IMG_SI = "assets/hello-kitty-beso.png"; // Hello Kitty y Daniel besándose
-const IMG_NO = "assets/badtz-maru-llorando.png"; // Badtz-Maru llorando
+// Enlaces directos usados
+const IMG_SI = "https://i.imgur.com/8qwdhiR.jpeg"; /* Hello Kitty y Dear Daniel besándose */ 
+const IMG_NO = "https://imgur.com/6f3ea183-5ac8-439c-8063-cb7901d3e371"; /* Badtz‑Maru PNG triste */ :contentReference[oaicite:3]{index=3}
 
 function acepta() {
   document.getElementById("msg").style.display = "block";
