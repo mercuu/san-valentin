@@ -70,9 +70,21 @@ button:hover { transform: scale(1.1); }
 /* GIF */
 #gifFinal {
   display: none;
-  margin-top: 15px;
-  width: 220px;
+  width: 280px; /* tamaño mayor */
   border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  top: 50%;
+  margin-top: 80px; /* para aparecer debajo del texto */
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+/* clase que activa la animación del gif */
+.showGif {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }
 
 /* CORAZONES */
@@ -93,11 +105,11 @@ button:hover { transform: scale(1.1); }
 
 <div class="card">
   <img src="https://i.imgur.com/P3ZCHMn.jpeg" alt="imagen principal">
-  <h1>¿Rocío quieres ser mi San Valentín? 💖</h1>
-  <button id="si" onclick="acepta()">Sí 💘</button>
+  <h1>¿Rocío quieres ser mi San Valentín? 💗</h1>
+  <button id="si" onclick="acepta()">Sí 💗</button>
   <button id="no" onclick="rechaza()">No 💔</button>
   <div class="mensaje" id="msg"></div>
-  <img id="gifFinal" src="https://i.imgur.com/yLbiN8f.gif" alt="Hello Kitty besando a Daniel">
+  <img id="gifFinal" src="" alt="Gif animado">
 </div>
 
 <script>
@@ -106,7 +118,12 @@ let tamañoSi = 1;
 function acepta() {
   document.getElementById("msg").style.display = "block";
   document.getElementById("msg").innerText = "VAMOO más te valía decir que sí 🙄";
-  document.getElementById("gifFinal").style.display = "block";
+  
+  let gif = document.getElementById("gifFinal");
+  gif.src = "https://i.imgur.com/yLbiN8f.gif"; // gif de besito
+  gif.classList.remove("showGif"); // reinicia animación
+  void gif.offsetWidth; // fuerza reinicio
+  gif.classList.add("showGif"); // activa animación
 
   for (let i = 0; i < 60; i++) crearCorazon();
 }
@@ -116,6 +133,12 @@ function rechaza() {
   document.getElementById("msg").innerText = "q mala :(💔";
   tamañoSi += 0.2;
   document.getElementById("si").style.transform = "scale(" + tamañoSi + ")";
+
+  let gif = document.getElementById("gifFinal");
+  gif.src = "https://i.imgur.com/PCKIKAJ.gif"; // gif llorando
+  gif.classList.remove("showGif"); // reinicia animación
+  void gif.offsetWidth; // fuerza reinicio
+  gif.classList.add("showGif"); // activa animación
 }
 
 function crearCorazon() {
@@ -131,4 +154,3 @@ function crearCorazon() {
 
 </body>
 </html>
-
