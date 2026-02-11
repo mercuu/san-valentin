@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Rocio 💗</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-soft: #ffdde1;
+            --pink-bright: #ff85a1;
+            --pink-dark: #ff4d6d;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--pink-soft);
+            background-image: radial-gradient(var(--pink-bright) 1px, transparent 1px);
+            background-size: 25px 25px; /* Fondo de puntitos estilo Sanrio */
+            font-family: 'Fredoka One', cursive;
+            overflow: hidden;
+            color: var(--pink-dark);
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 35px;
+            border-radius: 40px;
+            border: 6px solid var(--pink-bright);
+            box-shadow: 0 10px 25px rgba(255, 133, 161, 0.4);
+            max-width: 450px;
+            width: 90%;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .main-img {
+            width: 100%;
+            max-width: 260px;
+            height: 260px;
+            object-fit: contain;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 10px;
+            border: 3px dashed var(--pink-bright);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        #btn-si {
+            background-color: var(--pink-bright);
+            color: white;
+            box-shadow: 0 6px 0 #e66a8a;
+            z-index: 999;
+        }
+
+        #btn-no {
+            background-color: #ffd1dc;
+            color: var(--pink-dark);
+            box-shadow: 0 6px 0 #ffb3c1;
+        }
+
+        /* Lluvia de sus corazones */
+        .heart {
+            position: absolute;
+            font-size: 28px;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-card">
+        <img id="display-img" class="main-img" src="https://i.imgur.com/P3ZCHMn.jpeg" alt="Sanrio Inicio">
+        <h1 id="question">Rocio, ¿quieres ser mi San Valentín? 💗</h1>
+        
+        <div class="buttons">
+            <button id="btn-si">SÍ</button>
+            <button id="btn-no">NO</button>
+        </div>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const img = document.getElementById('display-img');
+        const question = document.getElementById('question');
+        
+        let siScale = 1;
+
+        const imgSi = "https://i.ibb.co/8xbp6vR/hello-kitty-daniel-beso.png";
+        const imgNo = "https://i.ibb.co/5x1b1sH/badtz-maru-triste.png";
+
+        btnNo.addEventListener('click', () => {
+            img.src = imgNo;
+            
+            // Crecer el botón SI
+            siScale += 0.5;
+            btnSi.style.transform = `scale(${siScale})`;
+            
+            // El botón NO escapa
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 60);
+            btnNo.style.position = "absolute";
+            btnNo.style.left = x + "px";
+            btnNo.style.top = y + "px";
+
+            question.innerHTML = "¿estás segura? ";
+        });
+
+        btnSi.addEventListener('click', () => {
+            img.src = imgSi;
+            question.innerHTML = "mas t valía decir q si 🙄 ";
+            
+            document.querySelector('.buttons').style.display = 'none';
+            
+            // Lluvia de SU corazón personalizado
+            setInterval(createHeart, 100);
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💗'; // Vuestro corazón
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-50px';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+    </script>
+</body>
+</html>
