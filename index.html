@@ -54,7 +54,6 @@ button {
   cursor: pointer;
   margin: 10px;
   transition: 0.3s;
-  position: relative;
 }
 
 #si {
@@ -65,7 +64,6 @@ button {
 #no {
   background: #444;
   color: white;
-  position: absolute;
 }
 
 button:hover {
@@ -116,7 +114,7 @@ button:hover {
 <h1>¿Rocío quieres ser mi San Valentín? 💖</h1>
 
 <button id="si" onclick="acepta()">Sí 💘</button>
-<button id="no" onmouseover="huir()">No 💔</button>
+<button id="no" onclick="rechaza()">No 💔</button>
 
 <div class="mensaje" id="msg"></div>
 
@@ -124,7 +122,7 @@ button:hover {
 
 <script>
 
-// CORAZONES DE FONDO CONSTANTES 💗
+/* CORAZONES DE FONDO CONSTANTES 💗 */
 setInterval(() => {
   let fondo = document.createElement("div");
   fondo.className = "fondo-corazon";
@@ -135,6 +133,8 @@ setInterval(() => {
 
   setTimeout(() => fondo.remove(), 10000);
 }, 700);
+
+let tamañoSi = 1;
 
 function acepta() {
   document.getElementById("msg").style.display = "block";
@@ -150,16 +150,13 @@ function rechaza() {
   document.getElementById("msg").style.display = "block";
   document.getElementById("msg").innerHTML =
     "q mala :(💔";
+
+  tamañoSi += 0.2;
+  document.getElementById("si").style.transform =
+    "scale(" + tamañoSi + ")";
 }
 
-// BOTÓN NO QUE HUYE 😈
-function huir() {
-  let btn = document.getElementById("no");
-  btn.style.top = Math.random() * 80 + "vh";
-  btn.style.left = Math.random() * 80 + "vw";
-}
-
-// CORAZONES EXPLOSIÓN 💗
+/* CORAZONES EXPLOSIÓN 💗 */
 function crearCorazon() {
   let heart = document.createElement("div");
   heart.className = "heart";
@@ -174,6 +171,7 @@ function crearCorazon() {
     heart.remove();
   }, 4000);
 }
+
 </script>
 
 </body>
