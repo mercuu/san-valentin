@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>San Valentín 💘</title>
+
+  <style>
+    body {
+      background: #f8c8d8;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      width: 320px;
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    img {
+      width: 200px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 22px;
+      color: #b0004d;
+      margin: 15px 0;
+    }
+
+    button {
+      border: none;
+      padding: 15px 35px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    #si {
+      background: #d1005d;
+      color: white;
+    }
+
+    #no {
+      background: #444;
+      color: white;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .mensaje {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #444;
+      display: none;
+      font-weight: bold;
+    }
+
+    /* CORAZONES */
+    .heart {
+      position: absolute;
+      font-size: 25px;
+      animation: floatUp 4s linear forwards;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-800px); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <!-- TU IMAGEN -->
+    <img src="https://i.imgur.com/P3ZCHMn.jpeg" alt="imagen">
+
+    <h1>¿Rocío quieres ser mi San Valentín? 💖</h1>
+
+    <!-- BOTONES -->
+    <button id="si" onclick="acepta()">Sí 💘</button>
+    <button id="no" onclick="rechaza()">No 💔</button>
+
+    <!-- MENSAJE -->
+    <div class="mensaje" id="msg"></div>
+
+  </div>
+
+  <script>
+    function acepta() {
+      document.getElementById("msg").style.display = "block";
+      document.getElementById("msg").innerHTML =
+        "VAMOO más te valía decir q si 🙄";
+
+      // corazones
+      for (let i = 0; i < 30; i++) {
+        crearCorazon();
+      }
+    }
+
+    function rechaza() {
+      document.getElementById("msg").style.display = "block";
+      document.getElementById("msg").innerHTML =
+        "q mala :(💔";
+    }
+
+    function crearCorazon() {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = "100%";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
